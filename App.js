@@ -3,6 +3,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  FlatList,
   StyleSheet,
   Text,
   View,
@@ -106,15 +107,23 @@ const woofPostStyles = StyleSheet.create({
   },
 });
 
+// {data.woofs.map(woof => (
+//     <WoofCard key={woof.id} name={woof.name} avatar={woof.avatar} />
+//   ))}
+
 // The screen rendering everything
 const HomeScreen = () => (
   <ScrollView style={homeScreenStyles.layout}>
     <Heading>Trending Woofs</Heading>
-    <ScrollView horizontal>
-      {data.woofs.map(woof => (
-        <WoofCard key={woof.id} name={woof.name} avatar={woof.avatar} />
-      ))}
-    </ScrollView>
+    <FlatList
+      horizontal
+      data={data.woofs}
+      keyExtractor={item => item.id}
+      extraData={selectedId}
+      renderItem={({item, index, separators}) => (
+        <WoofCard name={item.name} avatar={item.avatar} />
+      )}
+    />
     <Heading>New Woof Posts</Heading>
     {data.posts.map(post => (
       <WoofPost
