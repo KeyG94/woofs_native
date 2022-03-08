@@ -52,13 +52,17 @@ const WoofCard = props => (
 const woofCardStyles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
-    border: '1px solid rgba(0,0,0,.2)',
     borderRadius: 15,
     padding: 10,
     flex: 1,
     marginRight: 10,
     marginTop: 15,
     marginBottom: 25,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   title: {
     color: '#282033',
@@ -72,7 +76,10 @@ const WoofPost = props => (
       <Text style={woofPostStyles.title}>
         {props.title ? props.title : 'Title'}
       </Text>
-      <Text style={woofPostStyles.description}>
+      <Text
+        style={woofPostStyles.description}
+        numberOfLines={2}
+        ellipsizeMode="tail">
         {props.description ? props.description : 'Description'}
       </Text>
     </View>
